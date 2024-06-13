@@ -15,7 +15,7 @@
                     <img src="https://cdn-icons-png.flaticon.com/128/4710/4710738.png" alt="Logo" width="60" height="60" class="d-flex align-text-top">
                 </a>
                 <h1>Task List Organizer</h1>
-                <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">New Task</button> <!-- Button to generate new modal for a task-->
+                <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="preFillModalFormDate()">New Task</button> <!-- Button to generate new modal for a task-->
             </div>
         </nav>
         
@@ -42,6 +42,7 @@
                                         <thead>
                                             <!-- add data column and order to be able to sort on click -->
                                         <tr>
+                                            <th scope="col"></th>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Date Created</th>
@@ -51,36 +52,8 @@
                                             <th class="col">Description</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tableToDo">
                                             <!-- row will be injected -->
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>NameTask</td>
-                                            <td>DateTask</td>
-                                            <td>DueTask</td>
-                                            <td>LabelTask</td>
-                                            <td>StatusTask</td>
-                                            <td>DescriptionTask</td>
-                                            <td>
-                                                <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit
-                                                    <i class="bi bi-pencil-fill" height="40" width="40"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>NameTask</td>
-                                            <td>DateTask</td>
-                                            <td>DueTask</td>
-                                            <td>LabelTask</td>
-                                            <td>StatusTask</td>
-                                            <td>DescriptionTask</td>
-                                            <td>
-                                                <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit
-                                                    <i class="bi bi-pencil-fill" height="40" width="40"></i> <!--edit icon  DOESNT WORK    -->
-                                                </button>
-                                            </td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -98,7 +71,26 @@
                         </h2>
                         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                             <div class="accordion-body">
-                                
+                                <div class="container">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <!-- add data column and order to be able to sort on click -->
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Date Created</th>
+                                            <th scope="col">Date Due</th>
+                                            <th scope="col">Label</th>
+                                            <th scope="col">Status</th>
+                                            <th class="col">Description</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tableStarted" >
+                                            <!-- row will be injected -->
+                                        </tbody>
+                                    </table>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -113,7 +105,26 @@
                         </h2>
                         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
                             <div class="accordion-body">
-                                
+                                <div class="container">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <!-- add data column and order to be able to sort on click -->
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Date Created</th>
+                                            <th scope="col">Date Due</th>
+                                            <th scope="col">Label</th>
+                                            <th scope="col">Status</th>
+                                            <th class="col">Description</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tableCompleted">
+                                            <!-- row will be injected -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,6 +147,7 @@
                     <form>
                         <!-- task name input -->
                         <div class="mb-3">
+                            <input type="hidden" id="taskId">
                             <label for="taskFormName" class="form-label">Name*</label>
                             <input type="taskFormName" class="form-control" id="taskFormName" placeholder="e.g. Fix guestroom lighting" maxlength="40" required> <!-- name input -->
                         </div>
@@ -145,18 +157,18 @@
                             <div class="col">
                                 <label for="taskFormLabel" class="form-label">Label</label>
                                 <select id="taskFormLabel" class="form-select" aria-label="Default select example"> <!--label select -->
-                                    <option selected value="1">🏠 Household</option>
-                                    <option value="2">🚲 Health</option>
-                                    <option value="3">💼 Career</option>
-                                    <option value="4">🍻 Social</option>
+                                    <option selected value="🏠 Household">🏠 Household</option>
+                                    <option value="🚲 Health">🚲 Health</option>
+                                    <option value="💼 Career">💼 Career</option>
+                                    <option value="🍻 Social">🍻 Social</option>
                                 </select>
                             </div>
                             <div class="col">
                                 <label for="taskFormStatus" class="form-label">Status</label>
                                 <select id="taskFormStatus" class="form-select" aria-label="Default select example"> <!--Status select -->
-                                    <option selected value="1">To do</option>
-                                    <option value="2">Started</option>
-                                    <option value="3">Completed</option>
+                                    <option selected value="To Do">To do</option>
+                                    <option value="Started">Started</option>
+                                    <option value="Completed">Completed</option>
                                 </select>
                             </div>
                         </div>
