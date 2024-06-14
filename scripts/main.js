@@ -109,8 +109,8 @@ function populateTable(taskDictStatusGroup, tableId) {
         row.setAttribute('data-task-id', key); // set the data-task-id attribute to the key. this attribute is later used in SAVE TASK FUNCTION
         row.innerHTML = `
             <td>
-                <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editTask(${key})">Edit
-                    <i class="bi bi-pencil-fill" height="40" width="40"></i>
+                <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editTask(${key})">
+                    <i class="bi bi-pencil"></i>
                 </button>
             </td>
             <th scope="row">${rowNum}</th>
@@ -158,4 +158,18 @@ function editTask(taskId) {
 
     // Store the task ID in a hidden input for later use
     document.getElementById('taskId').value = taskId;
+}
+
+function hideTableHeaders (statusGroup) {
+    let statusKeys = Object.keys(statusGroup);
+    
+    for (let key of statusKeys) {
+        let taskGroupsDict = statusGroup[key];
+
+        if (Object.keys(taskGroupsDict).length === 0) {
+
+            document.getElementById("tableDisplayToDo").style.display = 'none';
+        }
+        
+    }
 }
