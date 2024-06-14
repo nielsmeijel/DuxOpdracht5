@@ -16,6 +16,9 @@
                 </a>
                 <h1>Task List Organizer</h1>
                 <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="preFillModalFormDate()">New Task</button> <!-- Button to generate new modal for a task-->
+                <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="preFillModalFormDate()">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
             </div>
         </nav>
         
@@ -205,6 +208,19 @@
             </div>
         </div>
     </div>
+
+
+    <template id="taskLabelSelectBox">
+        <label for="taskFormLabel" class="form-label">Label</label>
+        <select id="taskFormLabel" class="form-select" aria-label="Default select example"> <!--label select -->
+            <option selected value="🏠 Household">🏠 Household</option>
+            <option value="🚲 Health">🚲 Health</option>
+            <option value="💼 Career">💼 Career</option>
+            <option value="🍻 Social">🍻 Social</option>
+        </select>
+    </template>
+
+
 
 
 

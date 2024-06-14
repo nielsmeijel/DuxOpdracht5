@@ -1,11 +1,4 @@
-let exampleArray = [
-    {'taskName': 'Task 1','taskLabel':'huis', 'taskStatus':'To do', 'taskCreated':'06/06/2024', 'taskDue':'26/06/2024' , 'taskDescription': 'Description 1'},
-    {'taskName': 'Task 2','taskLabel':'werk', 'taskStatus':'Completed', 'taskCreated':'03/06/2024', 'taskDue':'10/06/2024' , 'taskDescription': 'Description 2'},
-    {'taskName': 'Task 3','taskLabel':'school', 'taskStatus':'Started', 'taskCreated':'01/06/2024', 'taskDue':'15/06/2024' , 'taskDescription': 'Description 3'},
-    {'taskName': 'Task 4','taskLabel':'werk', 'taskStatus':'To do', 'taskCreated':'06/06/2024', 'taskDue':'26/06/2024' , 'taskDescription': 'Description 4'},
-    {'taskName': 'Task 5','taskLabel':'school', 'taskStatus':'Completed', 'taskCreated':'03/06/2024', 'taskDue':'10/06/2024' , 'taskDescription': 'Description 5'},
-    {'taskName': 'Task 6','taskLabel':'huis', 'taskStatus':'Started', 'taskCreated':'01/06/2024', 'taskDue':'15/06/2024' , 'taskDescription': 'Description 6'},
-];
+
 
 function clearAllTables() {
     document.getElementById('tableToDo').innerHTML = '';
@@ -30,40 +23,22 @@ function formatDateToDDMMYYYY(date) {
 } 
 
 function preFillModalFormDate() {
+    clearPreviousTask()
     let today = new Date();
         let formattedDate = formatDateToDDMMYYYY(today);
         document.getElementById('taskFormCreated').value = formattedDate;
 }
-/*
-    * we click on the modal and get a form to fill in the task
-    * we click on the save button to save the task
-    * assemble inputs into an object
-    * set the object to local storage
-    * check what the key or oder is, log on console 
-    * 
-    * FUNCTION save tasks to local storage.
-    * tasks are saved to local storage as a json object DONE 
-    * 
-    * FUNCTION get tasks from local storage
-    * this part of the code needs to be repeated everytime a task is edited or created. 
-    * we get the tasks from local storage
-    * FUNCTION display tasks
-    * for each task
-    * check the status 
-    * use the status to call the class of the correct accrodion 
-    * * FUNCTION that passes html for the row of the table with the task.
-    * 
-    * each task has a button to edit the task (displayed in the table row)
-    * when the button is clicked the modal opens with the form filled in with the task details
-    * user can edit the task and save it. 
-    * the tables are then populated again. 
-    * 
-    * each task has a button to delete the task (displayed in the table row)
-    * when the button is clicked the task is deleted from the local storage
-    * the tables are then populated again.
-    * 
-    * 
-    */
+
+function clearPreviousTask() { 
+    document.getElementById('taskFormName').value = '';
+    //document.getElementById('taskFormLabel').value = '';
+    //document.getElementById('taskFormStatus').value = '';
+    document.getElementById('taskFormCreated').value = '';
+    document.getElementById('taskFormDue').value = '';
+    document.getElementById('taskFormDescription').value = '';
+    document.getElementById('taskId').value = '';
+}
+
 
 // FUNCTION save tasks to local storage.
 
@@ -125,13 +100,13 @@ function getTasks() {
 
 
 function populateTable(taskDictStatusGroup, tableId) {
-    let table = document.getElementById(tableId);
-    let rowNum = 1;
-    let keys = Object.keys(taskDictStatusGroup);
-    for (let key of keys) {
-        let task = taskDictStatusGroup[key];
+    let table = document.getElementById(tableId); // get that tbody element (thats where the id is)
+    let rowNum = 1; // initiate a counter
+    let keys = Object.keys(taskDictStatusGroup); // get the keys from the taskDictStatusGroup
+    for (let key of keys) { // loop through the keys
+        let task = taskDictStatusGroup[key]; // get the task with the key.
         let row = document.createElement('tr');
-        row.setAttribute('data-task-id', key);
+        row.setAttribute('data-task-id', key); // set the data-task-id attribute to the key. this attribute is later used in SAVE TASK FUNCTION
         row.innerHTML = `
             <td>
                 <button class="btn btn-primary d-flex me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editTask(${key})">Edit
